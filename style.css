@@ -1,0 +1,145 @@
+html{
+    margin:0;
+    padding: 0;
+}
+body{
+    margin:0;
+    padding: 0;
+}
+
+
+.navbar{
+    border-bottom: 2px solid rgba(255, 249, 249, 0.342);
+     height:50px;
+    font-size: 25px;
+    font-family: cursive;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container{
+    
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.boxcon{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.gamebox{
+    box-shadow: 0 0 .2rem #fff,
+            0 0 .2rem #fff,
+            0 0 2rem #bc13fe,
+            0 0 0.8rem #bc13fe,
+            0 0 2.8rem #bc13fe,
+            inset 0 0 1.3rem #bc13fe; 
+    padding: 50px;
+    margin: 50px;
+    border: 2px solid white;
+}
+
+
+.boxes{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    font-size: 70px;
+    border-collapse: collapse;
+    height:75px;
+    width: 75px;
+    border:2px solid white;
+}
+
+#box00{
+    border-top: none;
+    border-left: none;   
+}
+#box01{
+    border-top: none;
+}
+#box02{
+    border-top: none;
+    border-right: none;
+}
+#box10{
+    border-left: none;
+}
+#box12{
+    border-right: none;
+}
+#box20{
+    border-bottom: none;
+    border-left: none;   
+}
+#box21{
+    border-bottom: none;
+}
+#box22{
+    border-bottom: none;
+    border-right: none;
+}
+.player{
+    
+    height:160px;
+    width:160px;
+    padding: 20px;
+    margin: 50px;
+    border:2px solid white;
+}
+.heading{
+    color: white;
+    font-family: cursive;
+  
+}
+.box{
+    font-family: cursive;
+    color: white;
+    font-size: 20px;
+    
+
+}
+.megacontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    height: 588px;
+}
+button{box-shadow: 0 0 .2rem #fff,
+    0 0 .2rem #fff,
+    0 0 2rem #bc13fe,
+    0 0 0.8rem #bc13fe,
+    0 0 2.8rem #bc13fe,
+    inset 0 0 1.3rem #bc13fe; 
+    height: 50px;
+    border-radius: 40px;
+    width: 150px;
+    font-family: cursive;
+    background-color: #0000003d;
+    color: white;
+}
+.p11{
+   box-shadow:  0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000;
+
+
+}
+.p22{
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f;
+}
+.boxes:hover,button:hover{
+    cursor: pointer;
+}
