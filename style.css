@@ -163,3 +163,21 @@ button:hover{
     background-color: white;
     
 }
+@media (max-width: 1057px){
+.container {
+    flex-direction: column;
+    align-items: center;
+}
+.megacontainer{
+    height: auto;
+}
+.player{
+    height:auto;
+    width:auto;
+    padding: 20px;
+    margin: 50px;
+}
+.dash{
+    display: none !important;
+}
+}

@@ -115,6 +115,8 @@ const setdash=(arr)=>{
 const reset=()=>{
     winningrow=[];
     dash.style.display='none';
+    document.getElementsByClassName("p11")[0].style.boxShadow= "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000";
+    document.getElementsByClassName("p22")[0].style.boxShadow=  "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f";
     positions=[[0,0,0],[0,0,0],[0,0,0]];
     playercount=1;
     complete=false;
@@ -129,6 +131,16 @@ const reset=()=>{
 
 
 Button.addEventListener("click",reset);
+
+const blurloser=(letter)=>{
+    let boxes=document.getElementsByClassName("boxes");
+    console.log(boxes);
+    Array.from(boxes).forEach((element)=>{
+        if(element.innerText===letter){
+            element.style.textShadow="none";
+        }
+    })
+}
 
 const playerWon=(char)=>{
     if(char==='X'){
@@ -233,6 +245,8 @@ const setvalue=(e)=>{
         }
         if(checkwin('X')){
             playerWon('X');
+            blurloser('O');
+            document.getElementsByClassName("p22")[0].style.boxShadow="none";
             dash.style.boxShadow=  "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000";
             p1.innerText="Congratulations! You Won";
             p2.innerText="Try again Next time";
@@ -254,6 +268,8 @@ const setvalue=(e)=>{
     }
         if(checkwin('O')){
             playerWon('O');
+            blurloser('X');
+            document.getElementsByClassName("p11")[0].style.boxShadow="none";
             dash.style.boxShadow=  "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f";
             p2.innerText="Congratulations! You Won";
             p1.innerText="Try again Next time";
