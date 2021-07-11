@@ -117,20 +117,26 @@ body{
     justify-content: center;
     align-items: center;
     background-color: black;
-    height: 588px;
+    height: 680px;
 }
-button{box-shadow: 0 0 .2rem #fff,
+button{
+    height: 50px;
+    border-radius: 40px;
+    width: 300px;
+    font-family: cursive;
+    background-color: #bc13fe;
+    color: white;
+    font-size: 25px;
+    margin-top: 20px;
+}
+button:hover{
+    box-shadow: 0 0 .2rem #fff,
     0 0 .2rem #fff,
     0 0 2rem #bc13fe,
     0 0 0.8rem #bc13fe,
     0 0 2.8rem #bc13fe,
     inset 0 0 1.3rem #bc13fe; 
-    height: 50px;
-    border-radius: 40px;
-    width: 150px;
-    font-family: cursive;
-    background-color: #0000003d;
-    color: white;
+    background-color:black;
 }
 .p11{
    box-shadow:  0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000;
@@ -142,4 +148,18 @@ button{box-shadow: 0 0 .2rem #fff,
 }
 .boxes:hover,button:hover{
     cursor: pointer;
+}
+.megacontainer h1{
+    color: white;
+    font-family: cursive;
+
+}
+.dash{
+    position: absolute;
+    top:10px;
+    left:10px;
+    height:100px;
+    width:15px;
+    background-color: white;
+    
 }

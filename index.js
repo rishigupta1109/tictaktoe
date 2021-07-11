@@ -6,20 +6,115 @@ p2.innerText="Wait for your turn";
 let boxes=document.getElementsByClassName('boxes');
 var complete=false;
 var playercount=1;
+var winningrow=[];
 var Button=document.getElementById("reset");
 
 const playbutton=document.getElementById("play");
+const comingsoon=document.getElementById("comingsoon");
 const play=document.getElementsByClassName("megacontainer")[0];
 const game=document.getElementsByClassName("megacontainer")[1];
+const navbar=document.getElementsByClassName("navbar")[0];
+const dash=document.getElementsByClassName("dash")[0];
+navbar.style.display="none";
 game.style.display='none';
+dash.style.display='none';
 
+comingsoon.addEventListener("mouseover",(e)=>{e.target.innerText="coming soon"})
+comingsoon.addEventListener("mouseleave",(e)=>{e.target.innerText="Player VS CPU"})
 const startgame=()=>{
     play.style.display="none";
     game.style.display="flex";
+    navbar.style.display="flex";
 }
 playbutton.addEventListener("click",startgame);
 
+const setdash=(arr)=>{
+    if(arr[0]===0){
+        if(arr[1]===0){   
+            dash.style.display='flex';
+        dash.style.top="159px";
+        dash.style.left="667px";
+        dash.style.height="237px";
+        dash.style.width="8px";
+        dash.style.backgroundColor="white";
+        dash.style.transform="rotate(90deg)"  ;        
+        }
+        else if(arr[1]===1){
+            dash.style.display='flex';
+            dash.style.top="240px";
+            dash.style.left="667px";
+            dash.style.height="237px";
+            dash.style.width="8px";
+            dash.style.backgroundColor="white";
+            dash.style.transform="rotate(90deg)"  ; 
+        }
+        else if(arr[1]===2){
+            dash.style.display='flex';
+            dash.style.top="319px";
+            dash.style.left="667px";
+            dash.style.height="237px";
+            dash.style.width="8px";
+            dash.style.backgroundColor="white";
+            dash.style.transform="rotate(90deg)"  ; 
+        }
+    }
+    if(arr[0]===1){
+        if(arr[1]===0){
+            dash.style.display='flex';
+            dash.style.top="247px";
+            dash.style.left="591px";
+            dash.style.height="221px";
+            dash.style.width="8px";
+            dash.style.backgroundColor="white";
+            dash.style.transform="rotate(0deg)"  ; 
+        }
+        else if(arr[1]===1){
+            dash.style.display='flex';
+            dash.style.top="247px";
+            dash.style.left="668px";
+            dash.style.height="221px";
+            dash.style.width="8px";
+            dash.style.backgroundColor="white";
+            dash.style.transform="rotate(0deg)"  ; 
+        }
+        else if(arr[1]===2){
+            dash.style.display='flex';
+            dash.style.top="247px";
+            dash.style.left="748px";
+            dash.style.height="221px";
+            dash.style.width="8px";
+            dash.style.backgroundColor="white";
+            dash.style.transform="rotate(0deg)"  ;
+        }
+    }
+    if(arr[0]===2){
+        if(arr[1]===0){
+            dash.style.display='flex';
+            dash.style.top="209px";
+            dash.style.left="667px";
+            dash.style.height="292px";
+            dash.style.width="8px";
+            dash.style.backgroundColor="white";
+            dash.style.transform="rotate(135deg)"  ;
+           
+        }
+        else if(arr[1]===1){
+            dash.style.display='flex';
+            dash.style.top="217px";
+            dash.style.left="667px";
+            dash.style.height="292px";
+            dash.style.width="8px";
+            dash.style.backgroundColor="white";
+            dash.style.transform="rotate(45deg)"  ;
+        }
+        
+    }
+}
+
+
 const reset=()=>{
+    winningrow=[];
+    dash.style.display='none';
     positions=[[0,0,0],[0,0,0],[0,0,0]];
     playercount=1;
     complete=false;
@@ -69,6 +164,8 @@ const checkwin=(char)=>{
             }
         }
         if(oneRow){
+            winningrow=[0,i];
+            setdash(winningrow);
             Won=true;
             return Won;
         }
@@ -81,6 +178,8 @@ const checkwin=(char)=>{
             }
         }
         if(oneRow){
+            winningrow=[1,i];
+            setdash(winningrow);
             Won=true;
             return Won;
         }
@@ -92,6 +191,8 @@ const checkwin=(char)=>{
         }
     }
     if(diagonal){
+        winningrow=[2,0];
+        setdash(winningrow);
         Won=true;
         return Won;
     }
@@ -103,6 +204,8 @@ const checkwin=(char)=>{
         }
     }
     if(oppdiagonal){
+        winningrow=[2,1];
+        setdash(winningrow);
         Won=true;
         return Won;
     }
@@ -130,6 +233,7 @@ const setvalue=(e)=>{
         }
         if(checkwin('X')){
             playerWon('X');
+            dash.style.boxShadow=  "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000";
             p1.innerText="Congratulations! You Won";
             p2.innerText="Try again Next time";
         }
@@ -150,6 +254,7 @@ const setvalue=(e)=>{
     }
         if(checkwin('O')){
             playerWon('O');
+            dash.style.boxShadow=  "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f";
             p2.innerText="Congratulations! You Won";
             p1.innerText="Try again Next time";
         }
