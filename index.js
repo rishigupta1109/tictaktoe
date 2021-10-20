@@ -27,31 +27,52 @@ const startgame=()=>{
     navbar.style.display="flex";
 }
 playbutton.addEventListener("click",startgame);
-
+var getCumulativeOffset = function (obj) {
+    var left, top;
+    left = top = 0;
+    if (obj.offsetParent) {
+        do {
+            left += obj.offsetLeft;
+            top  += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+    }
+    return {
+        x : left,
+        y : top
+    };
+};
 const setdash=(arr)=>{
     if(arr[0]===0){
-        if(arr[1]===0){   
+        if (arr[1] === 0) {   
+            let box = document.getElementById("box00");
+            let XY = getCumulativeOffset(box);
+
             dash.style.display='flex';
-        dash.style.top="159px";
-        dash.style.left="667px";
+        // dash.style.top="159px";
+        dash.style.top=`${XY.y-82}px`;
+        dash.style.left=`${XY.x+109}px`;
         dash.style.height="237px";
         dash.style.width="8px";
         dash.style.backgroundColor="white";
         dash.style.transform="rotate(90deg)"  ;        
         }
-        else if(arr[1]===1){
+        else if (arr[1] === 1) {
+            let box = document.getElementById("box10");
+            let XY = getCumulativeOffset(box);
             dash.style.display='flex';
-            dash.style.top="240px";
-            dash.style.left="667px";
+            dash.style.top=`${XY.y-82}px`;
+            dash.style.left=`${XY.x+109}px`;
             dash.style.height="237px";
             dash.style.width="8px";
             dash.style.backgroundColor="white";
             dash.style.transform="rotate(90deg)"  ; 
         }
-        else if(arr[1]===2){
+        else if (arr[1] === 2) {
+            let box = document.getElementById("box20");
+            let XY = getCumulativeOffset(box);
             dash.style.display='flex';
-            dash.style.top="319px";
-            dash.style.left="667px";
+            dash.style.top=`${XY.y-82}px`;
+            dash.style.left=`${XY.x+109}px`;
             dash.style.height="237px";
             dash.style.width="8px";
             dash.style.backgroundColor="white";
@@ -59,28 +80,34 @@ const setdash=(arr)=>{
         }
     }
     if(arr[0]===1){
-        if(arr[1]===0){
+        if (arr[1] === 0) {
+            let box = document.getElementById("box00");
+            let XY = getCumulativeOffset(box);
             dash.style.display='flex';
-            dash.style.top="247px";
-            dash.style.left="591px";
+            dash.style.top=`${XY.y+6}px`;
+            dash.style.left=`${XY.x+33}px`;
             dash.style.height="221px";
             dash.style.width="8px";
             dash.style.backgroundColor="white";
             dash.style.transform="rotate(0deg)"  ; 
         }
-        else if(arr[1]===1){
+        else if (arr[1] === 1) {
+            let box = document.getElementById("box01");
+            let XY = getCumulativeOffset(box);
             dash.style.display='flex';
-            dash.style.top="247px";
-            dash.style.left="668px";
+            dash.style.top=`${XY.y+6}px`;
+            dash.style.left=`${XY.x+33}px`;
             dash.style.height="221px";
             dash.style.width="8px";
             dash.style.backgroundColor="white";
             dash.style.transform="rotate(0deg)"  ; 
         }
-        else if(arr[1]===2){
+        else if (arr[1] === 2) {
+            let box = document.getElementById("box02");
+            let XY = getCumulativeOffset(box);
             dash.style.display='flex';
-            dash.style.top="247px";
-            dash.style.left="748px";
+            dash.style.top=`${XY.y+6}px`;
+            dash.style.left=`${XY.x+33}px`;
             dash.style.height="221px";
             dash.style.width="8px";
             dash.style.backgroundColor="white";
@@ -88,20 +115,24 @@ const setdash=(arr)=>{
         }
     }
     if(arr[0]===2){
-        if(arr[1]===0){
+        if (arr[1] === 0) {
+            let box = document.getElementById("box10");
+            let XY = getCumulativeOffset(box);
             dash.style.display='flex';
-            dash.style.top="209px";
-            dash.style.left="667px";
+            dash.style.top=`${XY.y-115}px`;
+            dash.style.left=`${XY.x+109}px`;
             dash.style.height="292px";
             dash.style.width="8px";
             dash.style.backgroundColor="white";
             dash.style.transform="rotate(135deg)"  ;
            
         }
-        else if(arr[1]===1){
+        else if (arr[1] === 1) {
+            let box = document.getElementById("box10");
+            let XY = getCumulativeOffset(box);
             dash.style.display='flex';
-            dash.style.top="217px";
-            dash.style.left="667px";
+            dash.style.top=`${XY.y-100}px`;
+            dash.style.left=`${XY.x+109}px`;
             dash.style.height="292px";
             dash.style.width="8px";
             dash.style.backgroundColor="white";
