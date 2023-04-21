@@ -33,9 +33,10 @@ const startgame = (m) => {
   game.style.display = "flex";
   navbar.style.display = "flex";
   mode = m;
-  // if (mode === 1) {
+  if (mode === 1) {
+    document.querySelector(".p22 .heading").innerText = "CPU";
+  }
   //   playercount++;
-  //   document.querySelector(".p22 .heading").innerText = "CPU";
   //   positions[1][1] = "O";
   //   setTimeout(() => {
   //     playercount++;
@@ -179,16 +180,8 @@ const reset = () => {
     element.innerText = "";
   });
   if (mode === 1 && !fistTurn) {
-    playercount++;
-    document.querySelector(".p22 .heading").innerText = "CPU";
-    positions[1][1] = "O";
-    setTimeout(() => {
-      playercount++;
-      document.getElementById("box11").innerText = "O";
-      document.getElementById(
-        "box11"
-      ).style.textShadow = `rgb(255 255 255) 0px 0px 4px, rgb(255 255 255) 0px 0px 11px, rgb(255 255 255) 0px 0px 19px, rgb(27 255 0) 0px 0px 40px, rgb(27 255 0) 0px 0px 80px, rgb(27 255 0) 0px 0px 90px, rgb(27 255 0) 0px 0px 100px, rgb(27 255 0) 0px 0px 150px`;
-    }, 500);
+    playercount = 2;
+    CPUMove();
   }
   p1.innerText = "Your Turn";
   p2.innerText = "Wait for your turn";
@@ -400,51 +393,50 @@ const setvaluePVC = (e) => {
           document.getElementsByClassName("p22")[0].style.boxShadow = "none";
           return;
         } else {
-          setTimeout(() => {
-            // let random = Math.floor(Math.random() * 9);
-
-            // while (positions[Math.floor(random / 3)][random % 3]) {
-            //   random = Math.floor(Math.random() * 9);
-            // }
-            var opPos = optimisedPosn();
-            // console.log(opPos);
-            if (opPos[0] === -1) {
-              var opPos = optimalPosition("O");
-            }
-            let box = document.getElementById(`box${opPos[0]}${opPos[1]}`);
-            box.innerText = "O";
-            box.style.textShadow = `rgb(255 255 255) 0px 0px 4px, rgb(255 255 255) 0px 0px 11px, rgb(255 255 255) 0px 0px 19px, rgb(27 255 0) 0px 0px 40px, rgb(27 255 0) 0px 0px 80px, rgb(27 255 0) 0px 0px 90px, rgb(27 255 0) 0px 0px 100px, rgb(27 255 0) 0px 0px 150px`;
-            positions[opPos[0]][opPos[1]] = "O";
-
-            playercount++;
-            p2.innerText = "Wait for your turn";
-            p1.innerText = "Your Turn";
-
-            if (checkwin("O")) {
-              playerWon("O");
-              blurloser("X");
-              document.getElementsByClassName("p11")[0].style.boxShadow =
-                "none";
-              dash.style.boxShadow =
-                "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f";
-              p2.innerText = "Congratulations! You Won";
-              p1.innerText = "Try again Next time";
-            } else if (Completed()) {
-              p1.innerText = "Match Draw";
-              p2.innerText = "Match Draw";
-
-              document.getElementsByClassName("p11")[0].style.boxShadow =
-                "none";
-              document.getElementsByClassName("p22")[0].style.boxShadow =
-                "none";
-            }
-          }, 1000);
+          CPUMove();
         }
       }
     }
   }
 };
+const CPUMove = () => {
+  setTimeout(() => {
+    // let random = Math.floor(Math.random() * 9);
 
+    // while (positions[Math.floor(random / 3)][random % 3]) {
+    //   random = Math.floor(Math.random() * 9);
+    // }
+    var opPos = optimisedPosn();
+    // console.log(opPos);
+    if (opPos[0] === -1) {
+      var opPos = optimalPosition("O");
+    }
+    let box = document.getElementById(`box${opPos[0]}${opPos[1]}`);
+    box.innerText = "O";
+    box.style.textShadow = `rgb(255 255 255) 0px 0px 4px, rgb(255 255 255) 0px 0px 11px, rgb(255 255 255) 0px 0px 19px, rgb(27 255 0) 0px 0px 40px, rgb(27 255 0) 0px 0px 80px, rgb(27 255 0) 0px 0px 90px, rgb(27 255 0) 0px 0px 100px, rgb(27 255 0) 0px 0px 150px`;
+    positions[opPos[0]][opPos[1]] = "O";
+
+    playercount++;
+    p2.innerText = "Wait for your turn";
+    p1.innerText = "Your Turn";
+
+    if (checkwin("O")) {
+      playerWon("O");
+      blurloser("X");
+      document.getElementsByClassName("p11")[0].style.boxShadow = "none";
+      dash.style.boxShadow =
+        "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f";
+      p2.innerText = "Congratulations! You Won";
+      p1.innerText = "Try again Next time";
+    } else if (Completed()) {
+      p1.innerText = "Match Draw";
+      p2.innerText = "Match Draw";
+
+      document.getElementsByClassName("p11")[0].style.boxShadow = "none";
+      document.getElementsByClassName("p22")[0].style.boxShadow = "none";
+    }
+  }, 1000);
+};
 const checkWin = (char, check = false, tempPositions) => {
   let Won = false;
   for (let i = 0; i < 3; i++) {
