@@ -435,7 +435,7 @@ const CPUMove = () => {
       document.getElementsByClassName("p11")[0].style.boxShadow = "none";
       document.getElementsByClassName("p22")[0].style.boxShadow = "none";
     }
-  }, 1000);
+  }, 500);
 };
 const checkWin = (char, check = false, tempPositions) => {
   let Won = false;
@@ -511,14 +511,14 @@ const possibleWins = (i, j, player, tempPositions, turn) => {
   tempPositions[i][j] = turn;
   if (checkWin(player, true, tempPositions)) {
     tempPositions[i][j] = 0;
-    return [1, 0, 0];
+    return [1, 0, 0, 1];
   }
   if (checkWin(player === "X" ? "O" : "X", true, tempPositions)) {
     tempPositions[i][j] = 0;
-    return [0, 1, 0];
+    return [0, 1, 0, -1];
   }
   if (Completed(tempPositions)) return [0, 0, 1];
-  let ct = [0, 0, 0];
+  let ct = [0, 0, 0, 0];
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       if (tempPositions[i][j] === 0) {
@@ -532,6 +532,7 @@ const possibleWins = (i, j, player, tempPositions, turn) => {
         ct[0] += a[0];
         ct[1] += a[1];
         ct[2] += a[2];
+        ct[3] += a[3];
       }
     }
   }
@@ -547,6 +548,7 @@ const optimalPosition = (player) => {
     pos1 = -1,
     pos2 = -1;
   let arr = [];
+  console.log(player);
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       if (tempPositions[i][j] === 0) {

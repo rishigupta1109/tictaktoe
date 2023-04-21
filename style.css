@@ -15,7 +15,7 @@ body{
     border-bottom: 2px solid rgba(255, 249, 249, 0.342);
      height:50px;
     font-size: 25px;
-    font-family: cursive;
+    font-family: sans-serif;
     background-color: black;
     color: white;
     display: flex;
@@ -95,20 +95,23 @@ body{
     border-right: none;
 }
 .player{
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height:160px;
     width:160px;
-    padding: 20px;
+    padding: 40px;
     margin: 50px;
     border:2px solid white;
 }
 .heading{
     color: white;
-    font-family: cursive;
+    font-family: sans-serif;
   
 }
 .box{
-    font-family: cursive;
+    font-family: sans-serif;
     color: white;
     font-size: 20px;
     
@@ -126,7 +129,7 @@ button{
     height: 50px;
     border-radius: 40px;
     width: 300px;
-    font-family: cursive;
+    font-family: sans-serif;
     background-color: #bc13fe;
     color: white;
     font-size: 25px;
@@ -154,7 +157,7 @@ button:hover{
 }
 .megacontainer h1{
     color: white;
-    font-family: cursive;
+    font-family: sans-serif;
 
 }
 .dash{
