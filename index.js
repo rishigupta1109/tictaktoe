@@ -160,6 +160,23 @@ const setdash = (arr) => {
 };
 
 const reset = () => {
+  playercount = 1;
+
+  winningrow = [];
+  dash.style.display = "none";
+  document.getElementsByClassName("p11")[0].style.boxShadow =
+    "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000";
+  document.getElementsByClassName("p22")[0].style.boxShadow =
+    "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f";
+  positions = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ];
+  complete = false;
+  Array.from(boxes).forEach((element) => {
+    element.innerText = "";
+  });
   if (mode === 1) {
     playercount++;
     document.querySelector(".p22 .heading").innerText = "CPU";
@@ -172,22 +189,6 @@ const reset = () => {
       ).style.textShadow = `rgb(255 255 255) 0px 0px 4px, rgb(255 255 255) 0px 0px 11px, rgb(255 255 255) 0px 0px 19px, rgb(27 255 0) 0px 0px 40px, rgb(27 255 0) 0px 0px 80px, rgb(27 255 0) 0px 0px 90px, rgb(27 255 0) 0px 0px 100px, rgb(27 255 0) 0px 0px 150px`;
     }, 500);
   }
-  winningrow = [];
-  dash.style.display = "none";
-  document.getElementsByClassName("p11")[0].style.boxShadow =
-    "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000";
-  document.getElementsByClassName("p22")[0].style.boxShadow =
-    "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f";
-  positions = [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-  ];
-  playercount = 1;
-  complete = false;
-  Array.from(boxes).forEach((element) => {
-    element.innerText = "";
-  });
   p1.innerText = "Your Turn";
   p2.innerText = "Wait for your turn";
 };
@@ -333,7 +334,6 @@ const setvaluePVP = (e) => {
         } else if (Completed()) {
           p1.innerText = "Match Draw";
           p2.innerText = "Match Draw";
-
           document.getElementsByClassName("p11")[0].style.boxShadow = "none";
           document.getElementsByClassName("p22")[0].style.boxShadow = "none";
         }
