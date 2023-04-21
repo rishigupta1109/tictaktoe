@@ -34,6 +34,13 @@ const startgame = (m) => {
   mode = m;
   if (mode === 1) {
     document.querySelector(".p22 .heading").innerText = "CPU";
+    positions[1][1] = "O";
+    setTimeout(() => {
+      document.getElementById("box11").innerText = "O";
+      document.getElementById(
+        "box11"
+      ).style.textShadow = `rgb(255 255 255) 0px 0px 4px, rgb(255 255 255) 0px 0px 11px, rgb(255 255 255) 0px 0px 19px, rgb(27 255 0) 0px 0px 40px, rgb(27 255 0) 0px 0px 80px, rgb(27 255 0) 0px 0px 90px, rgb(27 255 0) 0px 0px 100px, rgb(27 255 0) 0px 0px 150px`;
+    }, 500);
   }
   Array.from(boxes).forEach((element) => {
     if (mode === 0) element.addEventListener("click", setvaluePVP);
