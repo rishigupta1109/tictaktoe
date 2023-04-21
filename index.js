@@ -206,7 +206,7 @@ const Completed = () => {
   }
   return bool;
 };
-const checkwin = (char) => {
+const checkwin = (char, check = false) => {
   let Won = false;
   for (let i = 0; i < 3; i++) {
     let oneRow = true;
@@ -217,7 +217,7 @@ const checkwin = (char) => {
     }
     if (oneRow) {
       winningrow = [0, i];
-      setdash(winningrow);
+      if (!check) setdash(winningrow);
       Won = true;
       return Won;
     }
@@ -231,7 +231,7 @@ const checkwin = (char) => {
     }
     if (oneRow) {
       winningrow = [1, i];
-      setdash(winningrow);
+      if (!check) setdash(winningrow);
       Won = true;
       return Won;
     }
@@ -244,7 +244,7 @@ const checkwin = (char) => {
   }
   if (diagonal) {
     winningrow = [2, 0];
-    setdash(winningrow);
+    if (!check) setdash(winningrow);
     Won = true;
     return Won;
   }
@@ -257,7 +257,7 @@ const checkwin = (char) => {
   }
   if (oppdiagonal) {
     winningrow = [2, 1];
-    setdash(winningrow);
+    if (!check) setdash(winningrow);
     Won = true;
     return Won;
   }
@@ -320,6 +320,33 @@ const setvaluePVP = (e) => {
     }
   }
 };
+const optimisedPosn = () => {
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (positions[i][j] === 0) {
+        positions[i][j] = "O";
+        if (checkwin("O", true)) {
+          positions[i][j] = 0;
+          return [i, j];
+        }
+        positions[i][j] = 0;
+      }
+    }
+  }
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (positions[i][j] === 0) {
+        positions[i][j] = "X";
+        if (checkwin("X", true)) {
+          positions[i][j] = 0;
+          return [i, j];
+        }
+        positions[i][j] = 0;
+      }
+    }
+  }
+  return [-1, -1];
+};
 const setvaluePVC = (e) => {
   let index1 = Number(e.target.id[3]);
   let index2 = Number(e.target.id[4]);
@@ -355,13 +382,21 @@ const setvaluePVC = (e) => {
             while (positions[Math.floor(random / 3)][random % 3]) {
               random = Math.floor(Math.random() * 9);
             }
-            let box = document.getElementById(
-              `box${Math.floor(random / 3)}${random % 3}`
-            );
-            box.innerText = "O";
-            box.style.textShadow = `rgb(255 255 255) 0px 0px 4px, rgb(255 255 255) 0px 0px 11px, rgb(255 255 255) 0px 0px 19px, rgb(27 255 0) 0px 0px 40px, rgb(27 255 0) 0px 0px 80px, rgb(27 255 0) 0px 0px 90px, rgb(27 255 0) 0px 0px 100px, rgb(27 255 0) 0px 0px 150px`;
+            var opPos = optimisedPosn();
+            if (opPos[0] === -1) {
+              let box = document.getElementById(
+                `box${Math.floor(random / 3)}${random % 3}`
+              );
+              box.innerText = "O";
+              box.style.textShadow = `rgb(255 255 255) 0px 0px 4px, rgb(255 255 255) 0px 0px 11px, rgb(255 255 255) 0px 0px 19px, rgb(27 255 0) 0px 0px 40px, rgb(27 255 0) 0px 0px 80px, rgb(27 255 0) 0px 0px 90px, rgb(27 255 0) 0px 0px 100px, rgb(27 255 0) 0px 0px 150px`;
+              positions[Math.floor(random / 3)][random % 3] = "O";
+            } else {
+              let box = document.getElementById(`box${opPos[0]}${opPos[1]}`);
+              box.innerText = "O";
+              box.style.textShadow = `rgb(255 255 255) 0px 0px 4px, rgb(255 255 255) 0px 0px 11px, rgb(255 255 255) 0px 0px 19px, rgb(27 255 0) 0px 0px 40px, rgb(27 255 0) 0px 0px 80px, rgb(27 255 0) 0px 0px 90px, rgb(27 255 0) 0px 0px 100px, rgb(27 255 0) 0px 0px 150px`;
+              positions[opPos[0]][opPos[1]] = "O";
+            }
             playercount++;
-            positions[Math.floor(random / 3)][random % 3] = "O";
             p2.innerText = "Wait for your turn";
             p1.innerText = "Your Turn";
 
