@@ -544,9 +544,7 @@ const optimalPosition = (player) => {
   let tempPositions = JSON.parse(JSON.stringify(positions));
   console.log(tempPositions);
   console.log(positions);
-  let max = -1,
-    pos1 = -1,
-    pos2 = -1;
+
   let arr = [];
   console.log(player);
   for (let i = 0; i < 3; i++) {

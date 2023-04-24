@@ -12,8 +12,8 @@ body{
 
 
 .navbar{
-    border-bottom: 2px solid rgba(255, 249, 249, 0.342);
-     height:50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.135);
+     height:10vh;
     font-size: 25px;
     font-family: sans-serif;
     background-color: black;
@@ -100,7 +100,7 @@ body{
     justify-content: center;
     align-items: center;
     height:160px;
-    width:160px;
+    width:200px;
     padding: 40px;
     margin: 50px;
     border:2px solid white;
@@ -147,7 +147,6 @@ button:hover{
 .p11{
    box-shadow:  0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000;
 
-
 }
 .p22{
     box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f;
@@ -173,15 +172,17 @@ button:hover{
 .container {
     flex-direction: column;
     align-items: center;
+    padding: 1rem 0;
 }
 .megacontainer{
     height: auto;
 }
 .player{
-    height:auto;
-    width:auto;
+    font-size: 1rem;
+    height: 80px;
+    width: 300px;
     padding: 20px;
-    margin: 50px;
+    margin: 0;
 }
 
 }
