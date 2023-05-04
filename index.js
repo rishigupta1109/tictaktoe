@@ -213,75 +213,6 @@ const playerWon = (char) => {
   }
   // positions=[[0,0,0],[0,0,0],[0,0,0]];
 };
-const Completed = () => {
-  let bool = true;
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      if (positions[i][j] === 0) {
-        bool = false;
-      }
-    }
-  }
-  return bool;
-};
-const checkwin = (char, check = false) => {
-  let Won = false;
-  for (let i = 0; i < 3; i++) {
-    let oneRow = true;
-    for (let j = 0; j < 3; j++) {
-      if (positions[i][j] !== char) {
-        oneRow = false;
-      }
-    }
-    if (oneRow) {
-      winningrow = [0, i];
-      if (!check) setdash(winningrow);
-      Won = true;
-      return Won;
-    }
-  }
-  for (let i = 0; i < 3; i++) {
-    let oneRow = true;
-    for (let j = 0; j < 3; j++) {
-      if (positions[j][i] !== char) {
-        oneRow = false;
-      }
-    }
-    if (oneRow) {
-      winningrow = [1, i];
-      if (!check) setdash(winningrow);
-      Won = true;
-      return Won;
-    }
-  }
-  let diagonal = true;
-  for (let i = 0; i < 3; i++) {
-    if (positions[i][i] !== char) {
-      diagonal = false;
-    }
-  }
-  if (diagonal) {
-    winningrow = [2, 0];
-    if (!check) setdash(winningrow);
-    Won = true;
-    return Won;
-  }
-  // 02 11 20
-  let oppdiagonal = true;
-  for (let i = 0; i < 3; i++) {
-    if (positions[i][2 - i] !== char) {
-      oppdiagonal = false;
-    }
-  }
-  if (oppdiagonal) {
-    winningrow = [2, 1];
-    if (!check) setdash(winningrow);
-    Won = true;
-    return Won;
-  }
-
-  return Won;
-};
 
 const setvaluePVP = (e) => {
   let index1 = Number(e.target.id[3]);
@@ -297,7 +228,7 @@ const setvaluePVP = (e) => {
         playercount++;
         positions[index1][index2] = "X";
 
-        if (checkwin("X")) {
+        if (checkWin("X", false, positions)) {
           playerWon("X");
           blurloser("O");
           document.getElementsByClassName("p22")[0].style.boxShadow = "none";
@@ -305,7 +236,7 @@ const setvaluePVP = (e) => {
             "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000";
           p1.innerText = "Congratulations! You Won";
           p2.innerText = "Try again Next time";
-        } else if (Completed()) {
+        } else if (completed(positions)) {
           document.getElementsByClassName("p11")[0].style.boxShadow = "none";
           document.getElementsByClassName("p22")[0].style.boxShadow = "none";
           p1.innerText = "Match Draw";
@@ -319,7 +250,7 @@ const setvaluePVP = (e) => {
         p1.innerText = "Your Turn";
         e.target.style.textShadow = `rgb(255 255 255) 0px 0px 4px, rgb(255 255 255) 0px 0px 11px, rgb(255 255 255) 0px 0px 19px, rgb(27 255 0) 0px 0px 40px, rgb(27 255 0) 0px 0px 80px, rgb(27 255 0) 0px 0px 90px, rgb(27 255 0) 0px 0px 100px, rgb(27 255 0) 0px 0px 150px`;
 
-        if (checkwin("O")) {
+        if (checkWin("O", false, positions)) {
           playerWon("O");
           blurloser("X");
           document.getElementsByClassName("p11")[0].style.boxShadow = "none";
@@ -327,7 +258,7 @@ const setvaluePVP = (e) => {
             "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f";
           p2.innerText = "Congratulations! You Won";
           p1.innerText = "Try again Next time";
-        } else if (Completed()) {
+        } else if (completed(positions)) {
           p1.innerText = "Match Draw";
           p2.innerText = "Match Draw";
           document.getElementsByClassName("p11")[0].style.boxShadow = "none";
@@ -342,7 +273,7 @@ const optimisedPosn = () => {
     for (let j = 0; j < 3; j++) {
       if (positions[i][j] === 0) {
         positions[i][j] = "O";
-        if (checkwin("O", true)) {
+        if (checkWin("O", true, positions)) {
           positions[i][j] = 0;
           return [i, j];
         }
@@ -354,7 +285,7 @@ const optimisedPosn = () => {
     for (let j = 0; j < 3; j++) {
       if (positions[i][j] === 0) {
         positions[i][j] = "X";
-        if (checkwin("X", true)) {
+        if (checkWin("X", true, positions)) {
           positions[i][j] = 0;
           return [i, j];
         }
@@ -377,7 +308,7 @@ const setvaluePVC = (e) => {
         playercount++;
         positions[index1][index2] = "X";
 
-        if (checkwin("X")) {
+        if (checkWin("X", false, positions)) {
           playerWon("X");
           blurloser("O");
           document.getElementsByClassName("p22")[0].style.boxShadow = "none";
@@ -385,7 +316,7 @@ const setvaluePVC = (e) => {
             "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000, inset 0 0 1.3rem #ff0000";
           p1.innerText = "Congratulations! You Won";
           p2.innerText = "Try again Next time";
-        } else if (Completed()) {
+        } else if (completed(positions)) {
           p1.innerText = "Match Draw";
           p2.innerText = "Match Draw";
 
@@ -409,7 +340,8 @@ const CPUMove = () => {
     var opPos = optimisedPosn();
     // console.log(opPos);
     if (opPos[0] === -1) {
-      var opPos = optimalPosition("O");
+      // var opPos = optimalPosition("O");
+      opPos = MinMaxOptimal("O");
     }
     let box = document.getElementById(`box${opPos[0]}${opPos[1]}`);
     box.innerText = "O";
@@ -420,7 +352,7 @@ const CPUMove = () => {
     p2.innerText = "Wait for your turn";
     p1.innerText = "Your Turn";
 
-    if (checkwin("O")) {
+    if (checkWin("O", false, positions)) {
       playerWon("O");
       blurloser("X");
       document.getElementsByClassName("p11")[0].style.boxShadow = "none";
@@ -428,7 +360,7 @@ const CPUMove = () => {
         "0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #4aff0f, 0 0 0.8rem#4aff0f, 0 0 2.8rem #4aff0f, inset 0 0 1.3rem #4aff0f";
       p2.innerText = "Congratulations! You Won";
       p1.innerText = "Try again Next time";
-    } else if (Completed()) {
+    } else if (completed(positions)) {
       p1.innerText = "Match Draw";
       p2.innerText = "Match Draw";
 
@@ -517,7 +449,10 @@ const possibleWins = (i, j, player, tempPositions, turn) => {
     tempPositions[i][j] = 0;
     return [0, 1, 0, -1];
   }
-  if (Completed(tempPositions)) return [0, 0, 1];
+  if (completed(tempPositions)) {
+    tempPositions[i][j] = 0;
+    return [0, 0, 1, 0];
+  }
   let ct = [0, 0, 0, 0];
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
@@ -577,4 +512,56 @@ const optimalPosition = (player) => {
   });
   console.log(arr);
   return [arr[0][1][0], arr[0][1][1]];
+};
+const minMax = (tempPositions, turn) => {
+  if (checkWin(turn, true, tempPositions)) {
+    return turn == "O" ? [-1] : [1];
+  }
+  if (checkWin(turn === "O" ? "X" : "O", true, tempPositions)) {
+    return turn == "O" ? [-1] : [1];
+  }
+  if (completed(tempPositions)) return [0];
+  let posn = [];
+  let ct = 0;
+  if (turn == "X") {
+    ct = Infinity;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (tempPositions[i][j] == 0) {
+          tempPositions[i][j] = "X";
+          let possibilities = minMax(tempPositions, "O");
+          if (ct > possibilities[0]) {
+            ct = possibilities[0];
+            posn = [i, j];
+          }
+          tempPositions[i][j] = 0;
+        }
+      }
+    }
+  } else {
+    ct = -Infinity;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (tempPositions[i][j] == 0) {
+          tempPositions[i][j] = "O";
+          let possibilities = minMax(tempPositions, "X");
+          if (ct < possibilities[0]) {
+            ct = possibilities[0];
+            posn = [i, j];
+          }
+          tempPositions[i][j] = 0;
+        }
+      }
+    }
+  }
+  return [ct, [posn[0], posn[1]]];
+};
+const MinMaxOptimal = (player) => {
+  let tempPositions = JSON.parse(JSON.stringify(positions));
+  console.log(tempPositions);
+  console.log(positions);
+
+  let arr = minMax(tempPositions, player);
+  console.log(arr);
+  return [arr[1][0], arr[1][1]];
 };
